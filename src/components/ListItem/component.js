@@ -48,7 +48,7 @@ const numColumns = 3;
                 `You won this game by ${counter + 1} steps`,  
                 [  
                     {
-                        text: 'OK', onPress: () => {
+                        text: 'Try another round', onPress: () => {
                         dispatch(setListData(populateList(CARD_PAIRS_VALUE)));
                         dispatch(updateCounter(0));
                         dispatch(updatePairs(0));
