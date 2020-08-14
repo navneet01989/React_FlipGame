@@ -7,8 +7,8 @@ import {
   } from 'react-native';
 import { connect } from 'react-redux';
 import { setListData, updateCounter } from '../../actions';
-import { CARD_PAIRS_VALUE } from '../../../App';
-import { populateList } from '../../utils';
+
+import { populateList, CARD_PAIRS_VALUE } from '../../utils';
 
 const Header = ({dispatch, counter}) => {
     const onResetClick = () => {

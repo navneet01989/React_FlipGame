@@ -1,3 +1,5 @@
+export const CARD_PAIRS_VALUE = 2;
+
 export const populateList = (itemCount) => {
     const tempArray = [];
     for(let i=0;i<itemCount;i++) {

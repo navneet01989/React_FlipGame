@@ -1,20 +1,12 @@
-import React, { useState } from 'react';
-import {
-    Text,
-    TouchableOpacity,
-    StyleSheet,
-    Dimensions,
-    Animated,
-    Alert
-  } from 'react-native';
+import React from 'react';
+import Animatedbasic from '../Animatedbasic';
+
 import { setListData, updateCounter, recordPosition, refreshList, updatePairs } from '../../actions';
 import { connect } from 'react-redux';
-import { CARD_PAIRS_VALUE } from '../../../App';
-import { populateList } from '../../utils';
-const numColumns = 3;
+import { populateList, CARD_PAIRS_VALUE } from '../../utils';
+import { Alert } from 'react-native';
   const ListItem = ({dispatch, data, counter, previousPositionClicked, updateListing, pairsCompleted, item, index}) => {
     const onCardPress = (item, index) => {
-        flip_animation_fun();
         const tempDataSource = data;
         if(tempDataSource[index].isShowing === false) {
             if(previousPositionClicked === -1) {
@@ -41,6 +33,7 @@ const numColumns = 3;
     };
     
     const showAlertOnCompletion = (pairsCompleted) => {
+        console.log('pairsCompleted', pairsCompleted, CARD_PAIRS_VALUE)
         if(pairsCompleted === CARD_PAIRS_VALUE) {
             Alert.alert(
                 'Congratulation!',  
@@ -59,51 +52,10 @@ const numColumns = 3;
         }
     }
 
-    const animatedValue = new Animated.Value(900);
-    const [value, setValue] = useState(900);
-    animatedValue.addListener(({value}) => {
-        setValue(value);
-    });
-
-    const flip_animation_fun = () => {
-        if(value >= 90) {
-            Animated.spring(animatedValue, {
-                toValue: 0, tension: 10, friction: 8, useNativeDriver: true
-            }).start();
-        } else {
-            Animated.spring(animatedValue, {
-                toValue: 900, tension: 10, friction: 8, useNativeDriver: true
-            }).start();
-        }
-    }
-    const setInterpolation = animatedValue.interpolate({
-        inputRange: [0, 900],
-        outputRange: ['180deg', '360deg']
-    });
-
-    const rotateYAnimation = {
-        transform: [{ rotate: setInterpolation }]
-    }
     return (
-        <TouchableOpacity testID="listItemParent" style={[rotateYAnimation, styles.item]} onPress={() => onCardPress(item, index)}>
-            <Text testID="listItem" style={styles.itemContent}>{item.isShowing ? item.number : '?'}</Text>
-        </TouchableOpacity>
+        <Animatedbasic testID="listItemParent" item={item} onPress={() => onCardPress(item, index)}/>
     )
   }
-  const styles = StyleSheet.create({
-    item: {
-        flex: 1,
-        height: Dimensions.get('window').width / numColumns,
-        backgroundColor: 'blue',
-        margin: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-      },
-      itemContent: {
-        color: 'white',
-        fontSize: 25
-      }
-  });
   const mapStateToProps = state => ({
     data: state.ListDataReducer.data,
     counter: state.ListDataReducer.counter,

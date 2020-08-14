@@ -1,16 +1,10 @@
 import React, { useEffect } from 'react';
-import {
-  SafeAreaView,
-  StatusBar
-} from 'react-native';
 
 import Header from './src/components/Header';
 import Listing from './src/components/Listing';
 import { setListData } from './src/actions';
 import { connect } from 'react-redux';
-import { populateList } from './src/utils';
-
-export const CARD_PAIRS_VALUE = 2;
+import { populateList, CARD_PAIRS_VALUE } from './src/utils';
 
 const App = ({dispatch}) => {
   useEffect( () => {
@@ -18,11 +12,8 @@ const App = ({dispatch}) => {
   }, []);
 return (
     <>
-      <StatusBar testID="parent" barStyle="dark-content"/>
-        <SafeAreaView>
-          <Header />
-          <Listing />
-      </SafeAreaView>
+      <Header testID="header"/>
+      <Listing testID="listing"/>
     </>
   );
 };

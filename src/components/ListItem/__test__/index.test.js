@@ -23,8 +23,8 @@ describe('Header snapshot', () => {
     store.clearActions()
   })
   test('render', async () => {
-    const card = wrapper.root.findByProps({ testID: 'listItem' });
-    expect(card.type.displayName).toBe('Text');
+    const card = wrapper.root.findByProps({ testID: 'listItemParent' });
+    expect(card.props.testID).toBe('listItemParent');
     
     // const listItemParent = wrapper.root.findByProps({ testID: 'listItemParent' });
     // act(() => {

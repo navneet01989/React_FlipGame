@@ -23,7 +23,9 @@ describe('Listing snapshot', () => {
     store.clearActions()
   })
   test('render', () => {
-    const parent = wrapper.root.findByProps({ testID: 'parent' });
-    expect(parent.props.testID).toBe('parent');
+    const header = wrapper.root.findByProps({ testID: 'header' });
+    expect(header.props.testID).toBe('header');
+    const listing = wrapper.root.findByProps({ testID: 'listing' });
+    expect(listing.props.testID).toBe('listing');
   });
 });
