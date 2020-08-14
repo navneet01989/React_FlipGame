@@ -88,7 +88,7 @@ const numColumns = 3;
 
     return (
         <TouchableOpacity style={[rotateYAnimation, styles.item]} onPress={() => onCardPress(item, index)}>
-            <Text style={styles.itemContent}>{item.isShowing ? item.number : '?'}</Text>
+            <Text testID="listItem" style={styles.itemContent}>{item.isShowing ? item.number : '?'}</Text>
         </TouchableOpacity>
     )
   }

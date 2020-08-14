@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header snapshot render 1`] = `
+<View
+  accessible={true}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "blue",
+      "flex": 1,
+      "height": 250,
+      "justifyContent": "center",
+      "margin": 1,
+      "opacity": 1,
+      "transform": Array [
+        Object {
+          "rotate": "360deg",
+        },
+      ],
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "white",
+        "fontSize": 25,
+      }
+    }
+    testID="listItem"
+  >
+    1
+  </Text>
+</View>
+`;
