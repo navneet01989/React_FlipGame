@@ -41,7 +41,6 @@ const numColumns = 3;
     };
     
     const showAlertOnCompletion = (pairsCompleted) => {
-        console.log('pairsCompleted', pairsCompleted, CARD_PAIRS_VALUE);
         if(pairsCompleted === CARD_PAIRS_VALUE) {
             Alert.alert(
                 'Congratulation!',  
@@ -85,9 +84,8 @@ const numColumns = 3;
     const rotateYAnimation = {
         transform: [{ rotate: setInterpolation }]
     }
-
     return (
-        <TouchableOpacity style={[rotateYAnimation, styles.item]} onPress={() => onCardPress(item, index)}>
+        <TouchableOpacity testID="listItemParent" style={[rotateYAnimation, styles.item]} onPress={() => onCardPress(item, index)}>
             <Text testID="listItem" style={styles.itemContent}>{item.isShowing ? item.number : '?'}</Text>
         </TouchableOpacity>
     )

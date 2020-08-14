@@ -22,10 +22,6 @@ describe('Header snapshot', () => {
   afterEach(function() {
     store.clearActions()
   })
-  test('render', () => {
-      const result = wrapper.toJSON();
-      expect(result).toMatchSnapshot();
-  });
 
   test('onResetClick', () => {
     const button = wrapper.root.findByProps({ testID: 'resetBtn' });
