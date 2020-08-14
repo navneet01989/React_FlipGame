@@ -26,10 +26,10 @@ describe('Header snapshot', () => {
     const card = wrapper.root.findByProps({ testID: 'listItem' });
     expect(card.type.displayName).toBe('Text');
     
-    const listItemParent = wrapper.root.findByProps({ testID: 'listItemParent' });
-    act(() => {
-        listItemParent.props.onPress();
-    });
+    // const listItemParent = wrapper.root.findByProps({ testID: 'listItemParent' });
+    // act(() => {
+    //     listItemParent.props.onPress();
+    // });
     // console.log('store.getActions()', store.getActions());
     // // expect(store.getActions()[0].type).toBe(UPDATE_COUNTER);  
   });
