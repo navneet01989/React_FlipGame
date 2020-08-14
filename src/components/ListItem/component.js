@@ -33,7 +33,7 @@ const numColumns = 3;
                     tempDataSource[index].isShowing = false;
                     tempDataSource[previousPositionClicked].isShowing = false;
                     dispatch(recordPosition(-1));
-                }, 1000);
+                }, 800);
             }
             dispatch(updateCounter(counter + 1));
             dispatch(refreshList(!updateListing));

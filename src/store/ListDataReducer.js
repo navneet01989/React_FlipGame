@@ -1,6 +1,6 @@
 import {
     UPDATING_LIST_DATA, 
-    INCREASING_COUNTER, 
+    UPDATE_COUNTER, 
     RECORD_POSITION, 
     REFRESH_LIST,
     UPDATE_PAIRS_DONE
@@ -14,7 +14,7 @@ const ListDataReducer  = ( state = initialState, action ) => {
     switch(action.type) {
         case UPDATING_LIST_DATA:
             return {...state, data: action.data};
-        case INCREASING_COUNTER:
+        case UPDATE_COUNTER:
             return {...state, counter: action.data};
         case RECORD_POSITION:
             return {...state, previousPositionClicked: action.data};

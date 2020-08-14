@@ -12,13 +12,13 @@ import { populateList } from '../../utils';
 
 const Header = ({dispatch, counter}) => {
     const onResetClick = () => {
-        dispatch(setListData(populateList(CARD_PAIRS_VALUE)));
-        dispatch(updateCounter(0));
+      dispatch(updateCounter(0));
+      dispatch(setListData(populateList(CARD_PAIRS_VALUE)));
     }
     return (
         <View style={styles.header}>
-          <TouchableOpacity onPress={onResetClick}><Text style={styles.reset}>Reset</Text></TouchableOpacity>
-          <Text style={styles.counterItem}>Steps {counter}</Text>
+          <TouchableOpacity testID="resetBtn" onPress={onResetClick}><Text style={styles.reset}>Reset</Text></TouchableOpacity>
+          <Text testID="counterText" style={styles.counterItem}>{`Steps ${counter}`}</Text>
         </View>
     )
 }
