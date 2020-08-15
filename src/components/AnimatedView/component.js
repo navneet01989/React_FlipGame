@@ -9,7 +9,7 @@ import {
   View
 } from 'react-native';
 
-export default class Animatedbasic extends Component {
+class AnimatedView extends Component {
   
   UNSAFE_componentWillMount() {
     this.animatedValue = new Animated.Value(0);
@@ -67,6 +67,7 @@ export default class Animatedbasic extends Component {
     }
     return (
         <TouchableNativeFeedback
+          testID="boxParent"
           background={TouchableNativeFeedback.Ripple('#fff')}
           disabled={isShowing}
           onPress={() => {
@@ -119,4 +120,4 @@ const styles = StyleSheet.create({
   }
 });
 
-AppRegistry.registerComponent('animatedbasic', () => animatedbasic);
+export default AnimatedView;

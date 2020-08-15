@@ -8,13 +8,13 @@ import ListItem from '../ListItem';
 
 const numColumns = 3;
   
-const Listing = ({data, updateListing}) => {
+const Listing = ({data, counter}) => {
     const renderItem = (props) => <ListItem {...props} />    
 
     return (
         <FlatList
             testID="flatList"
-            extraData={updateListing}
+            extraData={counter}
             numColumns={numColumns}
             data={data}
             renderItem={renderItem}
@@ -24,7 +24,7 @@ const Listing = ({data, updateListing}) => {
 
   const mapStateToProps = state => ({
     data: state.ListDataReducer.data,
-    updateListing: state.ListDataReducer.updateListing
+    counter: state.ListDataReducer.counter,
   });
 
   export default connect(mapStateToProps)(Listing);

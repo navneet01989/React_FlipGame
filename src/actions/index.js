@@ -1,7 +1,6 @@
 export const UPDATING_LIST_DATA = 'UPDATING_LIST_DATA';
 export const UPDATE_COUNTER = 'UPDATE_COUNTER';
 export const RECORD_POSITION = 'RECORD_POSITION';
-export const REFRESH_LIST = 'REFRESH_LIST';
 export const UPDATE_PAIRS_DONE = 'UPDATE_PAIRS_DONE';
 
 export const updatePairs = data => ({
@@ -24,7 +23,3 @@ export const recordPosition = data => ({
     data: data
 });
 
-export const refreshList = data => ({
-    type: REFRESH_LIST,
-    data: data
-});

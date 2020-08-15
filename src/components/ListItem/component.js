@@ -1,34 +1,38 @@
 import React from 'react';
 import AnimatedView from '../AnimatedView';
 
-import { setListData, updateCounter, recordPosition, refreshList, updatePairs } from '../../actions';
+import { setListData, updateCounter, recordPosition, updatePairs} from '../../actions';
 import { connect } from 'react-redux';
 import { populateList, CARD_PAIRS_VALUE } from '../../utils';
 import { Alert } from 'react-native';
-  const ListItem = ({dispatch, data, counter, previousPositionClicked, updateListing, pairsCompleted, item, index}) => {
-    const onCardPress = (item, index) => {
-        const tempDataSource = data;
-        if(tempDataSource[index].isShowing === false) {
+  const ListItem = ({dispatch, data, counter, previousPositionClicked, pairsCompleted, item, index}) => {
+    const onCardPress = (clickedItem, index) => {
+        const tempDataSource = [...data];
+        if(clickedItem.isShowing === false) {
             if(previousPositionClicked === -1) {
-                tempDataSource[index].isShowing = true;
-                dispatch(setListData(tempDataSource));
+                clickedItem.isShowing = true;
                 dispatch(recordPosition(index));
-            } else if(tempDataSource[previousPositionClicked].number === tempDataSource[index].number) {
-                tempDataSource[index].isShowing = true;
-                dispatch(setListData(tempDataSource));
+            } else if(tempDataSource[previousPositionClicked].number === clickedItem.number) {
+                clickedItem.isShowing = true;
                 dispatch(recordPosition(-1));
                 dispatch(updatePairs(pairsCompleted + 1));
                 showAlertOnCompletion(pairsCompleted + 1);
             } else {
-                tempDataSource[index].isShowing = true;
+                const futurePositions = [];
+                futurePositions.push(index);
+                futurePositions.push(previousPositionClicked);
+                clickedItem.isShowing = true;
                 setTimeout(() => {
-                    tempDataSource[index].isShowing = false;
-                    tempDataSource[previousPositionClicked].isShowing = false;
+                    for(let i=0;i<futurePositions.length;i++) {
+                        tempDataSource[futurePositions[i]].isShowing = false;
+                    }
                     dispatch(recordPosition(-1));
+                    console.log('futurePositions', futurePositions)
+                    futurePositions.splice(0, futurePositions.length);
+                    console.log('futurePositions >', futurePositions)
                 }, 600);
             }
             dispatch(updateCounter(counter + 1));
-            dispatch(refreshList(!updateListing));
         }
     };
     
@@ -51,7 +55,6 @@ import { Alert } from 'react-native';
             );
         }
     }
-    console.log('item', item);
     return (
         <AnimatedView testID="listItemParent" item={item} onPress={() => onCardPress(item, index)}/>
     )
@@ -60,7 +63,6 @@ import { Alert } from 'react-native';
     data: state.ListDataReducer.data,
     counter: state.ListDataReducer.counter,
     previousPositionClicked: state.ListDataReducer.previousPositionClicked,
-    updateListing: state.ListDataReducer.updateListing,
-    pairsCompleted: state.ListDataReducer.pairsCompleted,
+    pairsCompleted: state.ListDataReducer.pairsCompleted
   });
   export default connect(mapStateToProps)(ListItem);

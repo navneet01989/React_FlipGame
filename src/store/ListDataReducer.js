@@ -2,12 +2,14 @@ import {
     UPDATING_LIST_DATA, 
     UPDATE_COUNTER, 
     RECORD_POSITION, 
-    REFRESH_LIST,
-    UPDATE_PAIRS_DONE
+    UPDATE_PAIRS_DONE,
+    POSITION_BACKUP,
+    SELECTION,
+    PAIRS
 } from '../../src/actions'
 
 const initialState = {
-    data: {}, counter: 0, previousPositionClicked: -1, updateListing: false, pairsCompleted: 0
+    data: {}, counter: 0, previousPositionClicked: -1, positionBackup: -1, pairsCompleted: 0, selection: [], pairs: []
 };
 
 const ListDataReducer  = ( state = initialState, action ) => {
@@ -18,8 +20,6 @@ const ListDataReducer  = ( state = initialState, action ) => {
             return {...state, counter: action.data};
         case RECORD_POSITION:
             return {...state, previousPositionClicked: action.data};
-        case REFRESH_LIST:
-            return {...state, updateListing: action.data};
         case UPDATE_PAIRS_DONE:
             return {...state, pairsCompleted: action.data};
     }
