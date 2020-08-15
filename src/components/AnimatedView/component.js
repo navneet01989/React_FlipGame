@@ -3,9 +3,10 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View,
-  TouchableOpacity,
-  Animated
+  Animated,
+  Dimensions,
+  TouchableNativeFeedback,
+  View
 } from 'react-native';
 
 export default class Animatedbasic extends Component {
@@ -13,6 +14,7 @@ export default class Animatedbasic extends Component {
   UNSAFE_componentWillMount() {
     this.animatedValue = new Animated.Value(0);
     this.value = 0;
+    this.AnimationInprogress = false;
     this.animatedValue.addListener(({ value }) => {
       this.value = value;
     })
@@ -33,21 +35,22 @@ export default class Animatedbasic extends Component {
   flipCard() {
     const {item: {isShowing}} = this.props;
     if (this.value >= 90 && !isShowing) {
-      Animated.spring(this.animatedValue,{
-        toValue: 0,
-        friction: 8,
-        tension: 10,
-        useNativeDriver: true
-      }).start();
+        this.AnimationInprogress = true;
+        Animated.spring(this.animatedValue,{
+            toValue: 0,
+            friction: 8,
+            tension: 10,
+            useNativeDriver: true
+        }).start(() => this.AnimationInprogress = false);
     } else if(isShowing) {
-      Animated.spring(this.animatedValue,{
-        toValue: 180,
-        friction: 8,
-        tension: 10,
-        useNativeDriver: true
-      }).start();
+        this.AnimationInprogress = true;
+        Animated.spring(this.animatedValue,{
+            toValue: 180,
+            friction: 8,
+            tension: 10,
+            useNativeDriver: true
+        }).start(() => this.AnimationInprogress = false);
     }
-
   }
   
   render() {
@@ -63,25 +66,28 @@ export default class Animatedbasic extends Component {
       ]
     }
     return (
-      <View style={styles.container}>
-        <TouchableOpacity onPress={() => {
-            if(!isShowing) {
-                this.props.onPress();
-                this.flipCard();
-            }
-        }}>
-          <Animated.View style={[styles.flipCard, frontAnimatedStyle]}>
+        <TouchableNativeFeedback
+          background={TouchableNativeFeedback.Ripple('#fff')}
+          disabled={isShowing}
+          onPress={() => {
+              if(!isShowing && this.AnimationInprogress === false) {
+                  this.props.onPress();
+                  this.flipCard();
+              }
+          }}>
+          <View style={styles.container}>
+            <Animated.View style={[styles.flipCard, frontAnimatedStyle]}>
             <Text style={styles.flipText}>
-              ?
+                {'?'}
             </Text>
-          </Animated.View>
-          <Animated.View style={[backAnimatedStyle, styles.flipCard, styles.flipCardBack]}>
+            </Animated.View>
+            <Animated.View style={[backAnimatedStyle, styles.flipCard, styles.flipCardBack]}>
             <Text style={styles.flipText}>
-              {number}
+                {number}
             </Text>
-          </Animated.View>
-        </TouchableOpacity>
-      </View>
+            </Animated.View>
+            </View>
+        </TouchableNativeFeedback>
     );
   }
 }
@@ -91,19 +97,18 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: 'grey',
+    margin: 1,
+    height: Dimensions.get('window').width / 3,
   },
   flipCard: {
-    width: 200,
-    height: 200,
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'blue',
     backfaceVisibility: 'hidden',
+    height: Dimensions.get('window').width / 3,
   },
   flipCardBack: {
-    width: 200,
-    height: 200,
-    backgroundColor: "red",
     position: "absolute",
     top: 0,
   },

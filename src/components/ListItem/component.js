@@ -1,5 +1,5 @@
 import React from 'react';
-import Animatedbasic from '../Animatedbasic';
+import AnimatedView from '../AnimatedView';
 
 import { setListData, updateCounter, recordPosition, refreshList, updatePairs } from '../../actions';
 import { connect } from 'react-redux';
@@ -25,7 +25,7 @@ import { Alert } from 'react-native';
                     tempDataSource[index].isShowing = false;
                     tempDataSource[previousPositionClicked].isShowing = false;
                     dispatch(recordPosition(-1));
-                }, 800);
+                }, 600);
             }
             dispatch(updateCounter(counter + 1));
             dispatch(refreshList(!updateListing));
@@ -51,9 +51,9 @@ import { Alert } from 'react-native';
             );
         }
     }
-
+    console.log('item', item);
     return (
-        <Animatedbasic testID="listItemParent" item={item} onPress={() => onCardPress(item, index)}/>
+        <AnimatedView testID="listItemParent" item={item} onPress={() => onCardPress(item, index)}/>
     )
   }
   const mapStateToProps = state => ({

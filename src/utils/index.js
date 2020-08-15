@@ -1,4 +1,4 @@
-export const CARD_PAIRS_VALUE = 2;
+export const CARD_PAIRS_VALUE = 6;
 
 export const populateList = (itemCount) => {
     const tempArray = [];

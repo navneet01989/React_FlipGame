@@ -5,6 +5,7 @@ import Listing from './src/components/Listing';
 import { setListData } from './src/actions';
 import { connect } from 'react-redux';
 import { populateList, CARD_PAIRS_VALUE } from './src/utils';
+import { SafeAreaView, StatusBar } from 'react-native';
 
 const App = ({dispatch}) => {
   useEffect( () => {
@@ -12,8 +13,11 @@ const App = ({dispatch}) => {
   }, []);
 return (
     <>
-      <Header testID="header"/>
-      <Listing testID="listing"/>
+      <SafeAreaView>
+        <StatusBar barStyle="dark-content"/>
+        <Header testID="header"/>
+        <Listing testID="listing"/>
+      </SafeAreaView>
     </>
   );
 };
